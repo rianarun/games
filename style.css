@@ -1,0 +1,55 @@
+header > h1{
+    color:red;
+    background-color: black;
+}
+
+#gamesSection{
+    background-color: black;
+    height: 550px;
+}
+
+#gamesSection > h1{
+    color: red;
+
+}
+
+a{
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+#memoryDiv{
+    background-color: blue;
+    transition:  all 0.5s ease-in-out;
+}
+
+#memoryDiv{
+    transform: scale(1.2);
+}
+
+#memoryDiv, #tictac{
+    height: 250px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tictac {
+    background-color: red;
+    transition: all 0.5s ease-in-out;
+
+}
+
+#tictac {
+    transform: scale;
+}
+#gamesFlex{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
