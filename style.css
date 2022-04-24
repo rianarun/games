@@ -39,12 +39,12 @@ a:hover{
     justify-content: center;
 }
 
-#tictac:hover{
+#tictac{
     background-color: red;
     transition: all 0.5s ease-in-out;
 }
 
-#tictac {
+#tictac:hover{
     transform: scale(1.2);
 }
 #gamesFlex{
