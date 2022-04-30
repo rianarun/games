@@ -5,7 +5,8 @@ body {
 h1{
     text-align: center;
     text-transform: uppercase;
-    color: white;
+    color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 p{
@@ -20,10 +21,17 @@ section{
 
 
 .tile{
+    display: flex;
     border: 1px solid white;
     min-height: 100px;
     min-width: 100px;
     align-items: center;
+    color: white;
+    font: bolder;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    justify-content: center;
+    
 }
 
 footer{

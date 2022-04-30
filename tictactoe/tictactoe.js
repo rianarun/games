@@ -1,12 +1,19 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const tiles = Array.from(document.querySelectorAll('.tile'));
-    const currentPlayer = document.getElementById('displayPlayer');
+// Read the data from the board
+// Figure out who the current player is
+// Create the initial board
+// Update the board based on the user click
+// Define Winning conditions
+// Check for winning condition in each step
 
-    // Winning conditions
-    let board = ['','','','','','','','',''];
+window.addEventListener('DOMContentLoaded', ()=>{
+
+    const tiles = Array.from(document.querySelectorAll('.tile'));
+    const currentPlayer = document.querySelector("#displayPlayer");
+    const reset = document.querySelector('#reset');
+    let board = ['', '', '', '', '', '', '', '', ''];
     let cp = 'X';
-    
-    const winningCondition = [
+
+    const winningConditions = [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -14,50 +21,79 @@ window.addEventListener('DOMContentLoaded', () => {
         [1,4,7],
         [2,5,8],
         [0,4,8],
-        [2,4,6]
+        [2,4,6]                                                                                                
     ];
 
-    async function handleResult(){
-        let currentRound = false;
-        for(let i=0;i<=7;i++)
+    const isValid = (tile) => {
+        if(tile.innerHTML === 'X' || tile.innerHTML === 'O'){
+            return false;
+        }
+        return true;
+    }
+
+    const update = (index) => {
+        board[index] = cp;
+    }
+
+    const playerChange = () => {
+        cp = cp === 'X' ? 'O' : 'X';
+        currentPlayer.innerHTML = cp;
+    }
+    const resetBoard =() => {
+        board = ['', '', '', '', '', '', '', '', ''];
+        
+        if(cp==='0')
         {
-            const winCondition = winningCondition[i];
-            const input1 = board[winCondition[0]];
-            const input2 = board[winCondition[1]];
-            const input3 = board[winCondition[2]];
-            if(input1==='' || input2 === '' || input3==='')
+            playerChange();
+        }
+        tiles.forEach(tile=>{
+            tile.innerHTML ='';
+        });
+    }
+
+
+    async function handleResult(){
+        let roundWon = false;
+        for(i=0;i<=7;i++)
+        {
+            const winCondition = winningConditions[i];
+            const v1 = board[winCondition[0]];
+            const v2 = board[winCondition[1]];
+            const v3 = board[winCondition[2]];
+            if(v1==='' || v2==='' || v3==='')
             {
                 continue;
             }
-            if(input1===input2 && input2=== input3)
+            if(v1===v2 && v2===v3)
             {
-                currentRound=true;
+                roundWon = true;
                 break;
             }
         }
-
-        if(currentRound==true)
+        if(roundWon)
         {
             if(cp==='X')
-                window.alert("X Won!");
+                alert('X won!');
             else
-                window.alert("O Won!");
+                alert('O won!');
+                resetBoard();
         }
     }
 
-    const playerChange = () =>{
-        cp = cp==='X' ? 'O' : 'X';
-        currentPlayer.innerHTML = cp;
+    const userMove = (tile, index) => {
+        if(isValid(tile))
+        {
+            tile.innerHTML = cp;
+            update(index);
+            handleResult();
+            playerChange();
+        }
     }
 
-    const userAction = (tile, index) => {
-        tile.innerHTML = cp;
-        handleResult();
-        playerChange();
-    }
-
-    tiles.forEach((tile) => {
-        tile.addEventListener('click', ()=>userAction(tile));
+    tiles.forEach((tile, index)=>{
+        tile.addEventListener('click', ()=>userMove(tile,index));
     });
+
+      reset.addEventListener('click', resetBoard);
 
 });
